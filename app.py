@@ -5,6 +5,8 @@ from flask_restful import Resource,Api,reqparse,abort,fields,marshal_with
 from flask_mongoengine import MongoEngine
 from flask_pymongo import PyMongo
 import uuid
+from datetime import datetime
+import joblib as joblib
 
 
 app=Flask(__name__)
@@ -29,6 +31,7 @@ class Todo(db.Document):
              "completed":self.completed,
              "date_created":self.date_created
          }
+
 
 @app.route('/',methods=['POST','GET']) #decorator
 def index():
@@ -77,7 +80,32 @@ def update(id):
         return render_template('update.html',task=task)
     
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+@app.route('/predict',methods=['POST','GET'])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+def classify():
+
+        model=joblib.load('modelhotel.sav')
+        #dictionary to label all traffic signs class.
+        classes = { 
+        'happy':'Good news it was  a happy experience',
+        'not happy':'Sorry it was not a happy experience',
+ 
+        }
+        if request.method == 'POST':
+            
+                predictcontent=request.form['predict']
+                pred = model.predict([predictcontent])
+                sign=classes[pred[0]]
+        
+                print(sign)
+                return render_template('predict.html',sign=sign)
+    
+                
+        else:
+            return render_template('predict.html')
+            
+
+
+
 
 
 if __name__ == '__main__' :

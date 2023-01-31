@@ -7,13 +7,16 @@
 {% endblock %}
 
 {% block body  %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 <div class='content' >
-    <h1 style="text-align:center"> Task Master </h1>
+    <h1 style="text-align:center"> Ai Comments  </h1>
+    <br>
 
     <Table >
         <tr>
-            <th>Task</th>
+            <th>Comments</th>
             <th>َََAdded</th>
             <th>Actions</th>
         </tr>
@@ -29,9 +32,33 @@
             </td>
         {% endfor %}
         <Table/>
-
-    <form action="" method="post">
-        <input type="text" name="task" placeholder="Enter your task" required>
-        <input type="submit" value="Add Task">
-<div/>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        
+            <form   action="" method="post">
+                <div class="form-floating">
+                    <textarea name="task" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Comments</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add comment</button>
+            </form>
+           
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <form style="display:flex" action="/predict" method="post">
+            <div class="form-floating">
+                <textarea name="predict" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict comment</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
